@@ -14,7 +14,7 @@ código de SQL:
 
 3. ¿Cómo se comparan las cifras de los puntos anteriores respecto de las cifras totales en las fuentes desde un punto de vista del negocio?
 
-Las cifras totales de la base de CLAP y BANCUR contienen otro tipo de transacciones a considerar ademas de las transacciones concialibles, como por ejemplo las de cancelaciones, entre otras.
+	Las cifras totales de la base de CLAP y BANCUR contienen otro tipo de transacciones a considerar ademas de las transacciones concialibles, como por ejemplo las de cancelaciones, entre otras.
 Esas cifras repercuten el monto total ya que al haber transacciones de cancelacion el monto es negativo.
 
 4. Teniendo en cuenta los criterios de cruce entre ambas bases conciliables, escriba una sentencia de SQL que contenga la información de CLAP y BANSUR; agregue una columna en la que se evidencie si la transacción cruzó o no con su contrapartida y una columna en la que se inserte un ID autoincremental para el control de la conciliación
