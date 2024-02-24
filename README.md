@@ -4,7 +4,18 @@ Consignas:
 
 	código de SQL:
 
-	* ```select count(*) as cantidad_conc, sum(MONTO) as monto_conciliable from bansur_2 where TIPO_TRX = 'PAGO';```
+	```
+	select count(*) as cantidad_conc , sum(MONTO) as monto_conciliable
+	from bansur_2 b 
+	where NOT EXISTS (SELECT *
+ 			FROM bansur_2 b2
+ 			WHERE b.FECHA_TRANSACCION < b2.FECHA_TRANSACCION and
+ 			b.ID_ADQUIRIENTE = b2.ID_ADQUIRIENTE and
+ 			b.CODIGO_AUTORIZACION  = b2.CODIGO_AUTORIZACION and
+ 			b.TARJETA = b2.TARJETA and
+ 			b2.TIPO_TRX != 'PAGO')
+ 	and b.TIPO_TRX = 'PAGO';
+	```
 
 2. Escriba el código de SQL que le permite conocer el monto y la cantidad de las transacciones que SIMETRIK considera como conciliables para la base de BANSUR
 
