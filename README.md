@@ -19,24 +19,24 @@ Esas cifras repercuten el monto total ya que al haber transacciones de cancelaci
 
 4. Teniendo en cuenta los criterios de cruce entre ambas bases conciliables, escriba una sentencia de SQL que contenga la información de CLAP y BANSUR; agregue una columna en la que se evidencie si la transacción cruzó o no con su contrapartida y una columna en la que se inserte un ID autoincremental para el control de la conciliación
 
-```
-DECLARE @row_number INT;
-SET @row_number = 0;
-SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS row_number, 
-		CASE 
-			WHEN c.ID_BANCO is null or b.ID_ADQUIRIENTE is null THEN 'NO'
-			ELSE 'SI'
-		END AS cruzo_contrapartida,
-		b.*,
-		c.*
-from bansur_2 b  
-full join clap_2 c 
-	ON (b.ID_ADQUIRIENTE = c.ID_BANCO and 
-		b.CODIGO_AUTORIZACION  = c.CODIGO_AUTORIZACION and 
-		SUBSTRING(b.TARJETA, 1, 6) = c.INICIO6_TARJETA and 
-		SUBSTRING(b.TARJETA, 7, 10) = c.FINAL4_TARJETA and 
-		c.FECHA_TRANSACCION = b.FECHA_TRANSACCION);
-```
+	```
+	DECLARE @row_number INT;
+	SET @row_number = 0;
+	SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS row_number, 
+			CASE 
+				WHEN c.ID_BANCO is null or b.ID_ADQUIRIENTE is null THEN 'NO'
+				ELSE 'SI'
+			END AS cruzo_contrapartida,
+			b.*,
+			c.*
+	from bansur_2 b  
+	full join clap_2 c 
+		ON (b.ID_ADQUIRIENTE = c.ID_BANCO and 
+			b.CODIGO_AUTORIZACION  = c.CODIGO_AUTORIZACION and 
+			SUBSTRING(b.TARJETA, 1, 6) = c.INICIO6_TARJETA and 
+			SUBSTRING(b.TARJETA, 7, 10) = c.FINAL4_TARJETA and 
+			c.FECHA_TRANSACCION = b.FECHA_TRANSACCION);
+	```
 
 5. Diseñe un código que calcule el porcentaje de transacciones de la base conciliable de CLAP cruzó contra la liquidación de BANSUR.
 
