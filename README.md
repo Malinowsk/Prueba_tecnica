@@ -2,15 +2,15 @@ Consignas:
 
 1. Escriba el código de SQL que le permite conocer el monto y la cantidad de las transacciones que SIMETRIK considera como conciliables para la base de CLAP
 
-código de SQL:
+	código de SQL:
 
-* ```select count(*) as cantidad_conc, sum(MONTO) as monto_conciliable from bansur_2 where TIPO_TRX = 'PAGO';```
+	* ```select count(*) as cantidad_conc, sum(MONTO) as monto_conciliable from bansur_2 where TIPO_TRX = 'PAGO';```
 
 2. Escriba el código de SQL que le permite conocer el monto y la cantidad de las transacciones que SIMETRIK considera como conciliables para la base de BANSUR
 
-código de SQL:
+	código de SQL:
 
-* ```select count(*) as cantidad_conc, sum(MONTO) as monto_conciliable  from clap_2  where TIPO_TRX = 'PAGADA';```
+	* ```select count(*) as cantidad_conc, sum(MONTO) as monto_conciliable  from clap_2  where TIPO_TRX = 'PAGADA';```
 
 3. ¿Cómo se comparan las cifras de los puntos anteriores respecto de las cifras totales en las fuentes desde un punto de vista del negocio?
 
