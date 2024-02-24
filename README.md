@@ -21,7 +21,20 @@ Consignas:
 
 	código de SQL:
 
-	* ```select count(*) as cantidad_conc, sum(MONTO) as monto_conciliable  from clap_2  where TIPO_TRX = 'PAGADA';```
+	```
+	select count(*) as cantidad_conc, sum(MONTO) as monto_conciliable 
+	from clap_2 c 
+	where NOT EXISTS (
+			SELECT * 
+			FROM clap_2 c2 
+			WHERE c.FECHA_TRANSACCION < c2.FECHA_TRANSACCION and 
+			c.ID_BANCO = c2.ID_BANCO and 
+			c.CODIGO_AUTORIZACION  = c2.CODIGO_AUTORIZACION and 
+			c.INICIO6_TARJETA = c2.INICIO6_TARJETA and 
+			c.FINAL4_TARJETA = c2.FINAL4_TARJETA and 
+			c2.TIPO_TRX != 'PAGADA')
+	and c.TIPO_TRX = 'PAGADA';
+ 	```
 
 3. ¿Cómo se comparan las cifras de los puntos anteriores respecto de las cifras totales en las fuentes desde un punto de vista del negocio?
 
